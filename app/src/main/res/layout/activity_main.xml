@@ -8,14 +8,14 @@
     android:orientation="vertical">
 
 
-    <include
-        layout="@layout/costum_toolbar"
-        ></include>
-    
+    <include layout="@layout/costum_toolbar">
+    </include>
+
     <!--<androidx.viewpager.widget.PagerTabStrip
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/colorPrimary">
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:id="@+id/tabs">
 
     </androidx.viewpager.widget.PagerTabStrip>
 
@@ -23,16 +23,56 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#fff"
+        android:background="#FFF"
         android:id="@+id/pager">
 
-    </androidx.viewpager.widget.ViewPager>-->
-    
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/container">
+    </androidx.viewpager.widget.ViewPager> -->
 
-    </FrameLayout>
+    <!--
+    <com.astuetz.PagerSlidingTabStrip
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:textColor="#FFF"
+        app:pstsIndicatorColor="#AB5974"
+        android:id="@+id/tabs"
+        app:pstsIndicatorHeight="5dp"
+        app:pstsShouldExpand="true">
+
+    </com.astuetz.PagerSlidingTabStrip>
+
+    <android.support.v4.view.ViewPager
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#FFF"
+        android:id="@+id/pager">
+
+    </android.support.v4.view.ViewPager>
+
+    <FrameLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </FrameLayout>-->
+    
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabTextColor="@android:color/darker_gray"
+        app:tabSelectedTextColor="@android:color/white"
+        app:tabIndicatorColor="@android:color/white"
+        android:background="@color/colorPrimary">
+
+    </com.google.android.material.tabs.TabLayout>
+    
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </androidx.viewpager.widget.ViewPager>
 
 </LinearLayout>
