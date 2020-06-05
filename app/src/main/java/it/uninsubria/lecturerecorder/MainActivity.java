@@ -23,21 +23,26 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager = findViewById(R.id.viewPager);
-
-        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPagerAdapter.addFragment(RecordFragment.getIstance(),"RECORD");
-        viewPager.setAdapter(viewPagerAdapter);
-        tabLayout.setupWithViewPager(viewPager);
-
-
-
 
         //Aggiunta della costum_toolbar alla main activity
         Toolbar toolbar =  (Toolbar) findViewById(R.id.costum_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
+
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
+
+        //Aggiunta del RecordFragment e FileViewerFragment al ViewPageAdapter
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragment(RecordFragment.newInstance(),"RECORD");
+        viewPagerAdapter.addFragment(FileViewerFragment.newInstance(),"RECORD");
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+
+
+
     }
 }
