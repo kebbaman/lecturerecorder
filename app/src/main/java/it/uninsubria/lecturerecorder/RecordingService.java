@@ -28,11 +28,8 @@ public class RecordingService extends Service
         super.onCreate();
         dbAdapter = DBAdapter.getInstance(getApplicationContext());
         dbAdapter.open();
-
-
     }
 
-    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
@@ -67,6 +64,8 @@ public class RecordingService extends Service
         } catch (IOException e)
         {
             e.printStackTrace();
+            Toast.makeText(getApplicationContext(),"Fail\n"+e.getMessage(),Toast.LENGTH_LONG).show();
+
         }
 
 

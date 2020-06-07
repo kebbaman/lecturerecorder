@@ -101,6 +101,7 @@ public class RecordFragment extends Fragment
                     requestStorageReadPermission();
 
                 onRecord(recordingStartedFlag);
+
             }
         });
 
@@ -115,8 +116,15 @@ public class RecordFragment extends Fragment
             recordButton.setImageResource(R.drawable.ic_white_stop);
             Toast.makeText(getActivity(),"Recording",Toast.LENGTH_LONG).show();
             File path = new File(Environment.getExternalStorageDirectory() + "/Recordings");
-            if(!path.exists())
-                path.mkdir(); //comando unix per la creazione di una nuova cartella/file
+            if(!path.exists()) {
+                try {
+                    path.mkdir();//comando unix per la creazione di una nuova cartella/file
+                }catch(Exception e)
+                {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(),"MKDIR\n"+e.getMessage(),Toast.LENGTH_LONG).show();
+                }
+            }
             chronometer.setBase(SystemClock.elapsedRealtime());
             chronometer.start();
 
@@ -130,7 +138,7 @@ public class RecordFragment extends Fragment
         {
             recordButton.setImageResource(R.drawable.ic_white_rec);
             chronometer.stop();
-            chronometer.setBase(SystemClock.elapsedRealtime());
+            chronometer.setBase(SystemClock.elapsedRealtime());  //reset cronometro
             timeWhenPaused = 0;
             recordingStatus.setText("Tap the button to start recording");
             getActivity().stopService(recordingIntent);
