@@ -20,10 +20,16 @@ public class RecordingService extends Service
 
     File file;
     String fileName;
+    DBAdapter dbAdapter;
+
     @Override
     public void onCreate()
     {
         super.onCreate();
+        dbAdapter = DBAdapter.getInstance(getApplicationContext());
+        dbAdapter.open();
+
+
     }
 
     @Nullable
@@ -74,6 +80,9 @@ public class RecordingService extends Service
         Toast.makeText(getApplicationContext(),"Recording saved: "+file.getAbsolutePath(),Toast.LENGTH_LONG).show();
 
         //aggiunta a database sqlite
+        Recording recording = new Recording(fileName,file.getAbsolutePath(),elapsedMillis,System.currentTimeMillis());
+
+        dbAdapter.addRecording(recording);
     }
 
     @Override
@@ -81,6 +90,7 @@ public class RecordingService extends Service
     {
         if(mediaRecorder != null)
             stopRecording();
+        dbAdapter.close();
         super.onDestroy();
     }
 }

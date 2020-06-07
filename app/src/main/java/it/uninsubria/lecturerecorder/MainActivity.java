@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity
         //Aggiunta del RecordFragment e FileViewerFragment al ViewPageAdapter
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPagerAdapter.addFragment(RecordFragment.newInstance(),"RECORD");
-        viewPagerAdapter.addFragment(FileViewerFragment.newInstance(),"RECORD");
+        viewPagerAdapter.addFragment(FileViewerFragment.newInstance(),"SAVED RECORDINGS");
         viewPager.setAdapter(viewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
 
