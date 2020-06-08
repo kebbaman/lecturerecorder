@@ -2,7 +2,9 @@ package it.uninsubria.lecturerecorder;
 
 import android.content.ContentValues;
 
-public class Recording
+import java.io.Serializable;
+
+public class Recording implements Serializable
 {
     private String name;
     private String path;

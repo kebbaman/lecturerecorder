@@ -77,4 +77,25 @@ public class FileViewerFragment extends Fragment {
 
 
     }
+
+    /*
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        recordings = dbAdapter.getAllRecordings();
+        fileViewerAdapter.updateRecordingList(recordings);
+        Toast.makeText(getActivity(),"RESUME",Toast.LENGTH_LONG).show();
+    }*/
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser)
+        {
+            dbAdapter.open();
+            recordings = dbAdapter.getAllRecordings();
+            fileViewerAdapter.updateRecordingList(recordings);
+        }
+    }
 }

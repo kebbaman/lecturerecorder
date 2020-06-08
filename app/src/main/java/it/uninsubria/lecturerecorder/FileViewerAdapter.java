@@ -1,6 +1,7 @@
 package it.uninsubria.lecturerecorder;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.text.Layout;
 import android.text.format.DateUtils;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,6 +46,21 @@ class FileViewerAdapter extends RecyclerView.Adapter<FileViewerAdapter.FileViewe
             fileLength = itemView.findViewById(R.id.file_length);
             timeAdded = itemView.findViewById(R.id.file_time_added);
             cardView = itemView.findViewById(R.id.cardView);
+
+
+            cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AudioPlayerFragment audioPlayerFragment = new AudioPlayerFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("recording",recordings.get(getAdapterPosition()));
+                    audioPlayerFragment.setArguments(bundle);
+                    FragmentTransaction fragmentTransaction = ((FragmentActivity)context).getSupportFragmentManager().beginTransaction();
+                    audioPlayerFragment.show(fragmentTransaction,"audio_player_dialog");
+                }
+            });
+
+
         }
     }
 
@@ -74,6 +91,15 @@ class FileViewerAdapter extends RecyclerView.Adapter<FileViewerAdapter.FileViewe
         return recordings.size();
     }
 
+    public void updateRecordingList (ArrayList<Recording> recordings)
+    {
+        if (recordings!= null && recordings.size() > 0)
+        {
+            this.recordings.clear();
+            this.recordings.addAll(recordings);
+            notifyDataSetChanged();
+        }
+    }
 
 
 }

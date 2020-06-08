@@ -25,24 +25,12 @@
         android:id="@+id/chronometer"
         android:textSize="60dp"
         android:fontFamily="sans-serif-light"
-        android:layout_alignBottom="@+id/recordingProgressBar"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="64dp">
-        
-    </Chronometer>-
-
-    <ProgressBar
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:indeterminate="false"
-        android:max="100"
-        android:progress="0"
+        android:layout_marginBottom="64dp"
         android:layout_marginTop="27dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/recordingProgressBar">
-    </ProgressBar>
+        android:layout_alignParentTop="true">
+        
+    </Chronometer>
 
     <Button
         android:layout_width="wrap_content"
