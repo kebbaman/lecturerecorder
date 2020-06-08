@@ -2,10 +2,13 @@ package it.uninsubria.lecturerecorder;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 public class DBAdapter
 {
@@ -57,5 +60,21 @@ public class DBAdapter
 
         }
 
+    }
+
+    public ArrayList<Recording> getAllRecordings()
+    {
+        ArrayList<Recording> recordings = new ArrayList<Recording>();
+
+        Cursor cursor = db.rawQuery("select * from "+DBContract.SavedRecording.TABLE_NAME,null);
+
+        while(cursor.moveToNext())
+        {
+            Recording recording = new Recording(cursor.getString(1),cursor.getString(2),cursor.getLong(3),cursor.getLong(4));
+            recordings.add(recording);
+        }
+
+        cursor.close();
+        return recordings;
     }
 }
