@@ -89,7 +89,8 @@ public class FileViewerFragment extends Fragment {
     }*/
 
     @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
+    public void setUserVisibleHint(boolean isVisibleToUser)
+    {
         super.setUserVisibleHint(isVisibleToUser);
         if (isVisibleToUser)
         {

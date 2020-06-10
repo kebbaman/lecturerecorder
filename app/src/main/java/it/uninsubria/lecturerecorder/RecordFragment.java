@@ -17,12 +17,16 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
 import android.os.SystemClock;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,6 +45,7 @@ public class RecordFragment extends Fragment
     TextView recordingStatus;
     FloatingActionButton recordButton;
     Button pauseButton;
+    EditText title;
 
     Boolean recordingStartedFlag = true;
     Boolean recordingPausedFlag = true;
@@ -84,7 +89,7 @@ public class RecordFragment extends Fragment
         recordingStatus = getView().findViewById(R.id.recordingStatus);
         recordButton = getView().findViewById(R.id.recordButton);
         pauseButton = getView().findViewById(R.id.pauseButton);
-
+        title = getView().findViewById(R.id.recordingTitle);
         pauseButton.setVisibility(View.GONE);
         recordButton.setOnClickListener(new View.OnClickListener()
         {
@@ -100,8 +105,8 @@ public class RecordFragment extends Fragment
                 if(!checkReadFromStoragePermission())
                     requestStorageReadPermission();
 
+                hideKeyboard();
                 onRecord(recordingStartedFlag);
-
             }
         });
 
@@ -111,12 +116,14 @@ public class RecordFragment extends Fragment
     private void onRecord(Boolean flag)
     {
         Intent recordingIntent = new Intent(getActivity(), RecordingService.class);
+        recordingIntent.putExtra("Title",title.getText().toString());
         if(flag)
         {
             recordButton.setImageResource(R.drawable.ic_white_stop);
             Toast.makeText(getActivity(),"Recording",Toast.LENGTH_LONG).show();
             File path = new File(Environment.getExternalStorageDirectory() + "/Recordings");
-            if(!path.exists()) {
+            if(!path.exists())
+            {
                 try {
                     path.mkdir();//comando unix per la creazione di una nuova cartella/file
                 }catch(Exception e)
@@ -292,6 +299,15 @@ public class RecordFragment extends Fragment
                 break;
         }
     }
+    private void hideKeyboard()
+    {
+        View view = getActivity().getCurrentFocus();
+        if(view!=null)
+        {
+            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(getContext().INPUT_METHOD_SERVICE);
+            inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(),0);
+        }
 
+    }
 
 }

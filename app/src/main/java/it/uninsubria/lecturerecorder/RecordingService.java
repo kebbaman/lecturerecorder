@@ -6,9 +6,6 @@ import android.media.MediaRecorder;
 import android.os.Environment;
 import android.os.IBinder;
 import android.widget.Toast;
-
-import androidx.annotation.Nullable;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -37,6 +34,7 @@ public class RecordingService extends Service
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        fileName = intent.getStringExtra("Title");
         startRecording();
         return START_STICKY;
         //return super.onStartCommand(intent, flags, startId);
@@ -46,7 +44,7 @@ public class RecordingService extends Service
     {
         Long tsLong = System.currentTimeMillis()/1000;
         String ts = tsLong.toString();
-        fileName = "audio_"+ts;
+        fileName +=ts;  //momento espresso in millisecondi, è un modo per assicurarsi che il nome sia univoco.
         file = new File(Environment.getExternalStorageDirectory()+ "/Recordings/"+fileName+".mp3");
 
         mediaRecorder = new MediaRecorder();
@@ -65,10 +63,7 @@ public class RecordingService extends Service
         {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(),"Fail\n"+e.getMessage(),Toast.LENGTH_LONG).show();
-
         }
-
-
     }
 
     private void stopRecording()

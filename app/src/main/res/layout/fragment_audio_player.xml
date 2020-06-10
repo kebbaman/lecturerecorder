@@ -66,14 +66,15 @@
                     android:id="@+id/play_button"/>
 
                 <TextView
+                    android:id="@+id/length_text"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
-                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentEnd="true"
                     android:layout_alignParentRight="true"
+                    android:layout_marginTop="44dp"
                     android:layout_marginEnd="10dp"
                     android:layout_marginRight="10dp"
-                    android:id="@+id/length_text"
                     android:fontFamily="sans-serif-condensed" />
 
 
