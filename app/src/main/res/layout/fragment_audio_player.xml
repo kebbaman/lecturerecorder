@@ -39,31 +39,32 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/seekbar"/>
+
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <TextView
+                    android:id="@+id/time_progress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
                     android:layout_marginStart="10dp"
                     android:layout_marginLeft="10dp"
-                    android:id="@+id/time_progress"
                     android:fontFamily="sans-serif-condensed" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/play_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:fab_colorNormal="@color/colorPrimary"
-                    app:backgroundTint ="@color/colorPrimary"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginTop="10dp"
                     android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
                     android:src="@drawable/ic_play"
-                    android:id="@+id/play_button"/>
+                    app:backgroundTint="@color/colorPrimary"
+                    app:fab_colorNormal="@color/colorPrimary" />
 
                 <TextView
                     android:id="@+id/length_text"
